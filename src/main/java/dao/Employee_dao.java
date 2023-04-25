@@ -24,4 +24,13 @@ public class Employee_dao {
 	public List<Employee> fetch(){
 	return manager.createQuery("select x from Employee x").getResultList();	
 	}
+	
+	public void delete(int id) {
+        manager.getTransaction().begin();
+        Employee employee = manager.find(Employee.class, id);
+        if (employee != null) {
+            manager.remove(employee);
+        }
+        manager.getTransaction().commit();
+    }
 }
