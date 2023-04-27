@@ -15,7 +15,7 @@
 
 body {
     font-family: 'Roboto', Arial, sans-serif;
-    background-color: white;
+    background-color: #000000;
     height: 100vh;
     margin: 0;
     display: flex;

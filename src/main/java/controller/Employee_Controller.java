@@ -1,19 +1,14 @@
 package controller;
 
-import java.sql.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import dao.Employee_dao;
 import dto.Employee;
 import service.Employee_service;
 
@@ -22,11 +17,12 @@ public class Employee_Controller {
 
 	@Autowired
 	Employee_service service;
+
 	@RequestMapping("Loademployee")
 	public ModelAndView loademployee() {
 //		ModelAndView andView = new ModelAndView("Insert_data.jsp");
 //		andView.addObject("employee", employee);
-		return service.loademployee();	
+		return service.loademployee();
 	}
 
 	@PostMapping("saveemployee")
@@ -38,15 +34,16 @@ public class Employee_Controller {
 //		andView.addObject("msg", "Data added sucessfully");
 		return service.saveemployee(employee, Doj);
 	}
-	
-	@GetMapping("fetchall") 
+
+	@GetMapping("fetchall")
 	public ModelAndView fetch() {
 		return service.fetch();
 	}
-	
-	@PostMapping("delete")
-    public ModelAndView delete(@RequestParam int id) {
-        return service.deleteEmployee(id);
-    }
 
+	@GetMapping("delete")
+	public ModelAndView delete(@RequestParam int id) {
+		return service.deleteEmployee(id);
+	}
+
+	
 }

@@ -5,12 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,7 +19,7 @@ public class Employee_service {
 
 	@Autowired
 	Employee_dao dao;
-	
+
 	public ModelAndView loademployee() {
 		ModelAndView andView = new ModelAndView("Insert_data.jsp");
 		andView.addObject("employee", employee);
@@ -40,21 +34,42 @@ public class Employee_service {
 		andView.addObject("msg", "Data added sucessfully");
 		return andView;
 	}
-	
+
 //	@GetMapping("fetchall")
 	public ModelAndView fetch() {
-		ModelAndView andView = new ModelAndView("Result.jsp");
-//		List<Employee> list=;
-		andView.addObject("list",dao.fetch());
-		
+		ModelAndView andView = new ModelAndView();
+		List<Employee> list = dao.fetch();
+		if (list.isEmpty()) {
+//		andView.addObject("list",dao.fetch());
+			andView.addObject("msg", "No Data Found");
+			andView.setViewName("index.jsp");
+		} else {
+			andView.addObject("list", list);
+			andView.setViewName("Result.jsp");
+		}
 		return andView;
-		
+
 	}
-	
+
 	public ModelAndView deleteEmployee(@RequestParam int id) {
-        dao.delete(id);
-        ModelAndView andView = new ModelAndView("index.jsp");
-        andView.addObject("msg", "Employee data deleted successfully");
-        return andView;
-    }
+		dao.delete(id);
+		ModelAndView andView = new ModelAndView("index.jsp");
+		List<Employee> list = dao.fetch();
+		if (list.isEmpty()) {
+//		andView.addObject("list",dao.fetch());
+//			andView.addObject("msg", "No Data Found");
+			andView.addObject("msg", "No Data Found");
+			andView.setViewName("index.jsp");
+		} else {
+			andView.addObject("list", list);
+			andView.addObject("msg", "Employee data deleted successfully");
+			andView.setViewName("Result.jsp");
+
+		}
+
+		return andView;
+	}
+
+	
+
 }

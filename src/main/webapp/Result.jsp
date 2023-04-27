@@ -2,6 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring"
+	uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +19,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 <!-- Add custom CSS -->
 <style>
+/* Add your advanced CSS styles and graphics here */
 body {
 	font-family: 'Roboto', sans-serif;
 	background-color: #f5f5f5;
@@ -38,6 +42,11 @@ table {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 	border-radius: 10px;
 	overflow: hidden;
+	transition: box-shadow 0.5s ease-in-out;
+}
+
+table:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
 }
 
 th, td {
@@ -50,7 +59,6 @@ th {
 	background-color: #4CAF50;
 	color: #fff;
 	font-weight: bold;
-	cursor: pointer;
 }
 
 tr:hover {
@@ -58,6 +66,7 @@ tr:hover {
 }
 
 button {
+	position: relative;
 	background-color: #4CAF50;
 	color: #fff;
 	font-size: 1rem;
@@ -67,6 +76,7 @@ button {
 	cursor: pointer;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	transition: all 0.3s ease;
+	overflow: hidden;
 }
 
 button:hover {
@@ -74,31 +84,41 @@ button:hover {
 	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
 }
 
+button:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.2);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+}
+
+button:focus:after {
+	opacity: 1;
+}
+
 /* Add CSS3 animations */
 @
-keyframes fadeIn { 
-0% 
-{
+keyframes fadeIn { 0% {
 	opacity: 0;
 }
 
-100%{
-opacity:1;
+100
+%
+{
+opacity
+:
+1;
 }
 }
 table {
 	animation: fadeIn 1s ease-in-out;
 }
-
-button {
-	align-content: center;
-	align-items: center;
-}
 </style>
-
-<!-- Add JavaScript for sorting -->
-
-
 </head>
 <body>
 	<center>
@@ -107,11 +127,11 @@ button {
 		<table border="1" id="employeeTable">
 			<thead>
 				<tr>
-					<th onclick="sortTable(0)">ID</th>
-					<th onclick="sortTable(1)">Name</th>
-					<th onclick="sortTable(2)">Mobile</th>
-					<th onclick="sortTable(3)">Salary</th>
-					<th onclick="sortTable(4)">Date of joining</th>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Mobile</th>
+					<th>Salary</th>
+					<th>Date of joining</th>
 					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
@@ -125,18 +145,13 @@ button {
 						<td>${emp.getMobile()}</td>
 						<td>${emp.getSalary()}</td>
 						<td>${emp.getDate()}</td>
-						<td><button>Edit</button></td>
-						<td>
-							<form action="delete" method="post">
-								<input type="hidden" name="id" value="${emp.getId()}"> <input
-									type="submit" value="Delete">
-							</form>
+						<td><a href="Edit.jsp?id=${emp.getId()}"><button>Edit</button></a></td>
+						<td><a href="delete?id=${emp.getId()}"><button>Delete</button></a>
 						</td>
 					</tr>
 				</x:forEach>
 			</tbody>
 		</table>
-		<br>
 		<br> <a href="Home.jsp"><button>Back</button></a>
 	</center>
 </body>
