@@ -44,6 +44,18 @@ public class Employee_Controller {
 	public ModelAndView delete(@RequestParam int id) {
 		return service.deleteEmployee(id);
 	}
+	
+	
+	@RequestMapping("Edit")
+	public ModelAndView editemployee(@RequestParam int id) {
+//		ModelAndView andView = new ModelAndView("Insert_data.jsp");
+//		andView.addObject("employee", employee);
+		return service.editemployee(id);
+	}
 
+	@PostMapping("updateEmployee")
+	public ModelAndView updateemp(@ModelAttribute Employee employee,@RequestParam String Doj) {
+		return service.update(employee, Doj);
+	}
 	
 }

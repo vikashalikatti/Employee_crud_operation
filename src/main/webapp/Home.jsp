@@ -103,7 +103,6 @@ ${msg}
         <h1>Employee Management</h1>
         <a href="Loademployee"><button  type="submit">Insert Employee</button></a>
         <a href="fetchall"><button  type="submit">Fetch All Employee</button></a>
-        <a><button  type="submit">Fetch Employee By ID</button></a>
     </div>
     <script type="text/javascript" src="home.js"></script>
     <script src="path/to/bootstrap.min.js"></script>

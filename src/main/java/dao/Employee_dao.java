@@ -35,6 +35,14 @@ public class Employee_dao {
 		manager.getTransaction().commit();
 	}
 
+	public Employee find(int id) {
+		return manager.find(Employee.class, id);
+	}
 	
+	public void update(Employee employee) {
+		manager.getTransaction().begin();
+		manager.merge(employee);
+		manager.getTransaction().commit();
+	}
 
 }

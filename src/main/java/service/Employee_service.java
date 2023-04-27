@@ -70,6 +70,19 @@ public class Employee_service {
 		return andView;
 	}
 
+	public ModelAndView editemployee(@RequestParam int id) {
+		ModelAndView andView= new ModelAndView("Edit.jsp");
+		andView.addObject("employee",dao.find(id));
+		return andView;
+	}
+	
+	public ModelAndView  update(Employee employee, @RequestParam String Doj) {
+		employee.setDate(Date.valueOf(Doj));
+		dao.update(employee);
+		ModelAndView andView = new ModelAndView("index.jsp");
+		andView.addObject("msg", "Data updated sucessfully");
+		return andView;
+	}
 	
 
 }

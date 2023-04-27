@@ -142,10 +142,10 @@ table {
 					<tr>
 						<td>${emp.getId()}</td>
 						<td>${emp.getName()}</td>
-						<td>${emp.getMobile()}</td>
+						<td>${emp.getMobile()}</titd>
 						<td>${emp.getSalary()}</td>
 						<td>${emp.getDate()}</td>
-						<td><a href="Edit.jsp?id=${emp.getId()}"><button>Edit</button></a></td>
+						<td><a href="Edit?id=${emp.getId()}"><button>Edit</button></a></td>
 						<td><a href="delete?id=${emp.getId()}"><button>Delete</button></a>
 						</td>
 					</tr>
